@@ -1,10 +1,51 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+    $LastChangedRevision: 1938 $
+    $LastChangedDate: 2010-03-10 20:50:58 +1000 (Wed, 10 Mar 2010) $
+-->
 
 <!DOCTYPE articleinfo PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
-    "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+    "http://www.oasis-open.org/docbook/xml/4.5CR1/docbookx.dtd">
 
-<articleinfo id="DocbookDocumentInfo" xmlns:xi="http://www.w3.org/2001/XInclude">
-  <xi:include href="articleinfo/author/tony.xml"/>
-  <xi:include href="articleinfo/copyright.xml"/>
-  <title id="Title">Docbook Document</title>
+<articleinfo id="ArticleHeader">
+  <abstract id="Abstract">
+    <para>
+      This presentation is intended for the November 2009 meeting of the Brisbane Functional Programming Group
+      <ulink url="http://www.meetup.com/Brisbane-Functional-Programming-Group-BFG/"/>.
+    </para>
+    <para>
+      The <emphasis>monad</emphasis> concept will be presented to an audience with the assumption of knowledge of the
+      generics concept of either the Java or C# programming languages or some other form of parametric polymorphism. The
+      concept will be presented in a way with the objective of supplying enough understanding to apply the practical
+      implications and will not address the underlying mathematics or category theory.
+    </para>
+    <para>
+      The monad concept has attracted much mysticism, misunderstanding and mythology, which will also be addressed.
+    </para>
+    <para>
+      Questions and comments should be forwarded to <ulink url="mailto:code@tmorris.net">Tony Morris</ulink>
+      <xref linkend="PGPKEY"/>.
+    </para>
+    <para>
+      This work is licensed under a Creative Commons Attribution-Share Alike 3.0 Unported License
+      <xref linkend="Licence"/>.
+    </para>
+  </abstract>
+  <author id="Author">
+    <firstname>Tony</firstname>
+    <surname>Morris</surname>
+    <address>
+      <email>tmorris@tmorris.net</email>
+      <city>Brisbane</city>
+      <state>Queensland</state>
+      <country>Australia</country>
+    </address>
+  </author>
+  <copyright id="Copyright">
+    <year>2009</year>
+    <holder>
+      Tony Morris
+    </holder>
+  </copyright>
+  <title id="Title">What Does Monad Mean?</title>
 </articleinfo>

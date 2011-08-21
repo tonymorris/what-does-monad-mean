@@ -1,14 +1,44 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+    $LastChangedRevision: 1938 $
+    $LastChangedDate: 2010-03-10 20:50:58 +1000 (Wed, 10 Mar 2010) $
+-->
 
 <!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
-    "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
-    <!ENTITY % local.common.attrib
-               "xmlns:xi  CDATA  #FIXED 'http://www.w3.org/2001/XInclude'">
-]>
+    "http://www.oasis-open.org/docbook/xml/4.5CR1/docbookx.dtd">
 
-<article id="DocbookDocument" xmlns:xi="http://www.w3.org/2001/XInclude">
+<article xmlns:xi="http://www.w3.org/2001/XInclude">
   <xi:include href="articleinfo.xml"/>
-  <xi:include href="introduction.xml"/>
+  <xi:include href="Introduction.xml"/>
+  <xi:include href="Mythology.xml"/>
+  <xi:include href="Terminology.xml"/>
+  <xi:include href="WhatIsAMonad.xml"/>
+  <xi:include href="SoWhat.xml"/>
+  <xi:include href="CSharpLINQ.xml"/>
+  <xi:include href="ScalaComprehensions.xml"/>
+  <xi:include href="SideEffectTransformation.xml"/>
+  <xi:include href="Conclusion.xml"/>
+  <xi:include href="SpecialThanks.xml"/>
+
+  <xi:include href="biblography.xml"/>
+  <xi:include href="CodeExamples.xml"/>
   <xi:include href="PGPKEY.xml"/>
   <xi:include href="CC-BY-SA.xml"/>
 </article>
+
+<!-- code examples, Scala, C#, Haskell, Java -->
+
+<!--
+* Mythology and Terminology
+  * Monads and side-effects
+  * Monads and programming languages
+  * Monads make my program impure
+* What is a type constructor?
+* Polymorphism
+* Examples of monads
+* Why should I care?
+* C#, LINQ and monads
+* Scala, for-comprehensions and monads
+* Side-effect transformation
+* Haskell and monads
+-->
