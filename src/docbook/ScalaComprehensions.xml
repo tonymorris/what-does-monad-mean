@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+    $LastChangedRevision: 1938 $
+    $LastChangedDate: 2010-03-10 20:50:58 +1000 (Wed, 10 Mar 2010) $
+-->
+
+<!DOCTYPE sect1 PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+    "http://www.oasis-open.org/docbook/xml/4.5CR1/docbookx.dtd">
+
+<sect1 id="ScalaComprehensions" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>Scala for-comprehensions and Monads</title>
+  <sect2>
+    <title>Scala</title>
+    <itemizedlist>
+      <listitem>
+        <para>
+          Scala has had for-comprehensions from the beginning, but not always higher-kinded polymorphism<footnote>
+            <para>
+              Scala By Example (DRAFT October 28, 2009) still incorrectly states that Scala's type system is too weak to
+              express the generalisation.
+            </para>
+          </footnote>.
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          What C# calls <code>SelectMany</code> and we have called <code>bind</code>, Scala calls <code>flatMap</code>.
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          Like LINQ, for-comprehensions provide syntactic sugar for calls to <code>flatMap</code> (and others) and also
+          like LINQ are not type-safe<footnote>
+            <para>
+              This is because of historical reasons, unlike C#/LINQ, which is due to type system limitations.
+            </para>
+          </footnote>.
+        </para>
+      </listitem>
+    </itemizedlist>
+  </sect2>
+  <sect2>
+    <title>For-comprehensions</title>
+    <example>
+      <title>Scala for-comprehension<footnote>
+        <para>
+          <code>for</code> and <code>yield</code> are keywords.
+        </para>
+      </footnote></title>
+      <programlisting lang="Scala">
+for(i &lt;- a;
+    j &lt;- b;
+    k &lt;- c)
+yield foo(i, j, k)</programlisting>
+    </example>
+    <example>
+      <title>Without syntax sugar</title>
+      <programlisting lang="Scala">
+a flatMap (i =>
+b flatMap (j =>
+c map (k =>
+foo(i, j, k))))</programlisting>
+    </example>
+  </sect2>
+</sect1>

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+    $LastChangedRevision: 1938 $
+    $LastChangedDate: 2010-03-10 20:50:58 +1000 (Wed, 10 Mar 2010) $
+-->
+
+<!DOCTYPE sect1 PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+    "http://www.oasis-open.org/docbook/xml/4.5CR1/docbookx.dtd">
+
+<sect1 id="Terminology" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>Terminology</title>
+  <sect2>
+    <title>A quick note on terminology</title>
+    <para>
+      Laws, type constructors, kinds and higher-order polymorphism.
+    </para>
+  </sect2>
+  <sect2>
+    <title>Monad laws</title>
+    <sect3>
+      <title>What do we mean by the <emphasis>Monad Laws</emphasis>?</title>
+      <para>
+        <itemizedlist>
+          <listitem>
+            <para>
+              You may have heard of the monad laws. There are three of them. They even have names!<footnote>
+                <para>
+                  Associativity, Left Identity, Right Identity
+                </para>
+              </footnote>
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              Lots of interfaces have laws that are not enforced by the compiler.
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              You are all familiar with many of them.
+            </para>
+          </listitem>
+        </itemizedlist>
+      </para>
+    </sect3>
+    <sect3>
+      <title>For example</title>
+      <example>
+        <title>An abbreviated <code>List</code> interface using Java</title>
+        <programlisting lang="Java">
+interface List&lt;T> {
+  T get(int index);
+  int length();
+  List&lt;T> reverse();
+}</programlisting>
+      </example>
+      <itemizedlist>
+        <listitem>
+          <para>
+            It can be said that any instance (<code>list</code>) must satisfy
+            <code>list.get(list.length() - 1) == list.reverse().get(0)</code>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            There are other laws that are implicit in this abbreviated interface.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            All monad instances must satisfy three laws, but we won't go into them. Instead, just be aware of what we
+            mean by the monad laws.
+          </para>
+        </listitem>
+      </itemizedlist>
+    </sect3>
+  </sect2>
+  <sect2>
+    <title>Type constructors and kinds</title>
+    <itemizedlist>
+      <listitem>
+        <para>
+          In Java 1.5, <code>List</code> is not a type, because it requires a type variable <footnote>
+            <para>ignoring reverse compatibility where <code>List</code> is equivalent to <code>List&lt;?></code></para>
+          </footnote>.
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <code>List&lt;Long></code> is a type, but <code>List</code> is a <emphasis>type constructor</emphasis>.
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <code>List</code> has a <emphasis>kind</emphasis> which is denoted <code>* -> *</code> and reads <quote>takes
+          one type to reveal a type</quote>.
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <code>HashMap</code> is a type constructor which is kinded <code>(*,*) -> *</code> since it takes two type
+          variables to reveal a type.
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <code>List&lt;Long></code> has a <emphasis>kind</emphasis> which is denoted <code>*</code> (i.e. it is a
+          type).
+        </para>
+      </listitem>
+    </itemizedlist>
+  </sect2>
+  <sect2>
+    <title>Higher-order Polymorphism</title>
+    <itemizedlist>
+      <listitem>
+        <para>
+          Languages such as Java and C# have <emphasis>first-order polymorphism</emphasis> because they allow us to
+          abstract on types. e.g. <code>List&lt;A></code> can have a <code>reverse</code> function that works on any
+          element type (the <code>A</code>).
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          More practical programming languages and type systems<footnote>
+            <para>Haskell, Scala, Clean (not F#)</para>
+          </footnote> allow us to abstract on <emphasis>type constructors</emphasis> as well.
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          This feature is called higher-order (or higher-kinded) polymorphism.
+        </para>
+      </listitem>
+    </itemizedlist>
+  </sect2>
+</sect1>

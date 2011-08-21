@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+    $LastChangedRevision: 1938 $
+    $LastChangedDate: 2010-03-10 20:50:58 +1000 (Wed, 10 Mar 2010) $
+-->
+
+<!DOCTYPE sect1 PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+    "http://www.oasis-open.org/docbook/xml/4.5CR1/docbookx.dtd">
+
+<sect1 id="CSharpLINQ" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>C#, LINQ Query Comprehensions and Monads</title>
+  <sect2>
+    <title>C# 3.0</title>
+    <itemizedlist>
+      <listitem>
+        <para>
+          Microsoft introduced LINQ query comprehensions into C# version 3.0.
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          Many people are mistaken in believing LINQ is about enumerable data structures or SQL queries.
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          These are just monad instances! LINQ query comprehensions are syntactic sugar for working with
+          <emphasis>any</emphasis> monad.
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          What we have called <code>bind</code>, C#/LINQ calls <code>SelectMany</code> and what we have called
+          <code>Transformer</code>, C# calls <code>Func</code>. C# also introduces syntactic sugar for instantiating
+          <code>Func</code>.
+        </para>
+      </listitem>
+    </itemizedlist>
+  </sect2>
+  <sect2>
+    <title>Syntax sugar</title>
+    <para>
+      <code>x => method(x)</code> is syntax sugar for a <code>Func</code> instance that takes a variable (x) and runs
+      <code>method</code> on it.
+    </para>
+    <example>
+      <title>LINQ Query Comprehension<footnote>
+        <para>
+          <code>from</code>, <code>in</code>, and <code>select</code> are keywords.
+        </para>
+      </footnote></title>
+      <programlisting lang="C#">
+from i in a
+from j in b
+from k in c
+select foo(i, j, k);</programlisting>
+    </example>
+    <example>
+      <title>Without the syntax sugar</title>
+      <programlisting lang="C#">
+a.SelectMany(i =>
+b.SelectMany(j =>
+c.Select(k =>
+foo(i, j, k))));</programlisting>
+    </example>
+  </sect2>
+  <sect2>
+    <title>LINQ</title>
+    <para>
+      In the previous examples, the query comprehension can work on <emphasis>any monad</emphasis>. Types declare their
+      monad simply by implementing the <code>SelectMany</code> (and <code>Select</code>) method.
+    </para>
+    <para>
+      Notice that a general LINQ query comprehension cannot have a type since it would require higher-order
+      polymorphism. Consequently, we cannot write functions to run on any monad.
+    </para>
+    <para>
+      C# is catching up to practical languages (unlike Java), but still has an awful long way to go! 
+    </para>
+  </sect2>
+</sect1>

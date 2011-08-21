@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+    $LastChangedRevision: 1938 $
+    $LastChangedDate: 2010-03-10 20:50:58 +1000 (Wed, 10 Mar 2010) $
+-->
+
+<!DOCTYPE sect1 PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+    "http://www.oasis-open.org/docbook/xml/4.5CR1/docbookx.dtd">
+
+<sect1 id="SpecialThanks" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>Special Thanks</title>
+  <itemizedlist>
+    <listitem>
+      <para>
+        Dr. Andrew Wines, Orthopaedic Surgeon, Sydney.
+      </para>
+    </listitem>
+    <listitem>
+      <para>
+        Dr. Lachlan Steffen, General Practitioner, Brisbane.
+      </para>
+    </listitem>
+    <listitem>
+      <para>
+        Dr. Jennie Noakes, Radiologist, Sydney.
+      </para>
+    </listitem>
+    <listitem>
+      <para>
+        The anonymous practitioners of medical science and research for your enormous sacrifices toward the betterment
+        of humanity. Your contributions are appreciated.
+      </para>
+    </listitem>
+  </itemizedlist>
+</sect1>

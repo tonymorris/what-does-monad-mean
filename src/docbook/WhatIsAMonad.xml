@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+    $LastChangedRevision: 1938 $
+    $LastChangedDate: 2010-03-10 20:50:58 +1000 (Wed, 10 Mar 2010) $
+-->
+
+<!DOCTYPE sect1 PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+    "http://www.oasis-open.org/docbook/xml/4.5CR1/docbookx.dtd">
+
+<sect1 id="WhatIsAMonad" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>So what is a Monad then?</title>
+  <sect2>
+    <title>It's a fluffy cloud</title>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="resources/fluffycloud.jpg" format="JPG"/>
+      </imageobject>
+      <caption>
+        A monad is a fluffy cloud
+      </caption>
+    </mediaobject>
+  </sect2>
+  <sect2>
+    <title>Produced by a sonic boom</title>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="resources/sonicboom.jpg" format="JPG"/>
+      </imageobject>
+      <caption>
+        A monad is a cloud produced by the condensation of the sonic boom of a supersonic aircraft
+      </caption>
+    </mediaobject>
+  </sect2>
+  <sect2>
+    <title>Monad metaphors are stupid</title>
+    <para>
+      Yeah OK, so monad metaphors are stupid and divertive.
+    </para>
+    <para>
+      Metaphors are training wheels that obscure learning opportunities and stall progress (object-oriented programming
+      anyone?).
+    </para>
+    <para>
+      Let's get to the nuts of it.
+    </para>
+  </sect2>
+  <sect2>
+    <title>First let's pretend that Java/C# are practical</title>
+    <example>
+      <title>Pseudo-Java with an invented notation for higher-order polymorphism<footnote>
+        <para>
+          or C# with a slight syntax change
+        </para></footnote></title>
+      <programlisting>
+interface Transformer&lt;X, Y> {
+  Y transform(X x);
+}
+
+interface Monad&lt;M> { // M :: * -> *
+  &lt;A> M&lt;A> pure(A a);
+  &lt;A, B> M&lt;B> bind(Transformer&lt;A, M&lt;B>> t, M&lt;A> a);
+}</programlisting>
+    </example>
+  </sect2>
+  <sect2>
+    <title>Finished staring?</title>
+    <para>
+      A monad is any instance of that interface<footnote>
+        <para>
+          and also satisfies the three monad laws
+        </para>
+      </footnote>. That is <emphasis role="bold">all it is</emphasis>.
+    </para>
+    <example>
+      <title>The List monad</title>
+      <programlisting>
+new Monad&lt;List>() { // List :: * -> * (kind checks)
+  public &lt;A> List&lt;A> pure(A a) {
+    return List.single(a);
+  }
+
+  public &lt;A, B> List&lt;B> bind(Transformer&lt;A, List&lt;B>> t, List&lt;A> a) {
+    List&lt;B> r = List.empty();
+    for(e : a) r.addAll(t.transform(e));        
+    return r;
+  }          
+};</programlisting>
+    </example>
+  </sect2>
+  <sect2>
+    <title>Monads and more monads</title>
+    <para>
+      In fact, there are lots of possible instances of the <code>Monad</code> interface. Even <code>Transformer</code>
+      with one type variable applied is a monad.
+    </para>
+    <example>
+      <title>The Transformer&lt;X, _> monad</title>
+      <programlisting>
+new Monad&lt;Transformer&lt;X, _>>() {
+  public &lt;A> Transformer&lt;X, A> pure(A a) {
+    return new Transformer&lt;X, A>() {
+      public A transform(X x) { return a; }
+    };
+  }
+
+  public &lt;A, B> Transformer&lt;X, B> bind(
+        Transformer&lt;A, Transformer&lt;X, B>> t, Transformer&lt;X, A> a) {
+    return new Transformer&lt;X, B>() {
+      public B transform(X x) { return
+        t.transform(a.transform(x)).transform(x); }
+    };
+  }
+};</programlisting>
+    </example>
+  </sect2>
+  <sect2>
+    <title>More examples</title>
+    <example>
+      <title>A value is a monad<footnote>
+        <para>more correctly called The Identity Monad</para>
+      </footnote></title>
+      <programlisting>
+interface Value&lt;T> {
+  T value();
+}
+
+new Monad&lt;Value>() {
+  public &lt;A> Value&lt;A> pure(A a) {
+    return new Value&lt;A>() { public A value() { return a; } };
+  }
+
+  public &lt;A, B> Value&lt;B> bind(Transformer&lt;A, Value&lt;B>> t, Value&lt;A> a) {
+    return t.transform(a.value());
+  }
+};</programlisting>
+    </example>
+  </sect2>
+  <sect2>
+    <title>Other examples include</title>
+    <itemizedlist>
+      <listitem>
+        <para>
+          Nullable values
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          Chaining exceptions
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          Disjoint union
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          Continuations
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          Functions
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          State
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          Parsers
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          Side-effects (!!!)
+        </para>
+      </listitem>
+    </itemizedlist>
+  </sect2>
+</sect1>

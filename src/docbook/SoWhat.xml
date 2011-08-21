@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+    $LastChangedRevision: 1938 $
+    $LastChangedDate: 2010-03-10 20:50:58 +1000 (Wed, 10 Mar 2010) $
+-->
+
+<!DOCTYPE sect1 PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+    "http://www.oasis-open.org/docbook/xml/4.5CR1/docbookx.dtd">
+
+<sect1 id="SoWhat" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>So what, why do I care?</title>
+  <sect2>
+    <title>Repetition is for solving non-problems using clumsy languages</title>
+    <para>
+      We can write functions that abstract on the type constructor and needn't be repeated. Similar to a
+      <code>sort</code> function that accepts any value that has declared itself the ability to compare, these functions
+      can act on any type constructor that has declared itself a monad.
+      <itemizedlist>
+        <listitem>
+          <para>
+            &lt;A> M&lt;List&lt;A>> sequence(List&lt;M&lt;A>> list)
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            &lt;A> M&lt;List&lt;A>> replicate(int n, M&lt;A> a)
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            &lt;A> M&lt;A> join(M&lt;M&lt;A>> a)
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <emphasis>etc. etc.</emphasis>  
+          </para>
+        </listitem>
+      </itemizedlist>
+    </para>
+  </sect2>
+  <sect2>
+    <title>And it's not just monads</title>
+    <para>
+      We can do this because we have <emphasis>higher-order polymorphism</emphasis>. We can also generalise applicative
+      functors, comonads, arrows, covariant and contravariant functors, binary covariant functors, structure traversal
+      and many other concepts that are well documented in the literature.
+    </para>
+    <para>
+      Monads get far more attention than they deserve!  
+    </para>
+  </sect2>
+</sect1>

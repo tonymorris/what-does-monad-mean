@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+    $LastChangedRevision: 1938 $
+    $LastChangedDate: 2010-03-10 20:50:58 +1000 (Wed, 10 Mar 2010) $
+-->
+
+<!DOCTYPE sect1 PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+    "http://www.oasis-open.org/docbook/xml/4.5CR1/docbookx.dtd">
+
+<sect1 id="SideEffectTransformation" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>Transforming side-effects using monads</title>
+  <sect2>
+    <title>Suppose a program in a typical language</title>
+    <programlisting lang="Java">
+T t = e1();
+e2(t);
+U u = e3(t);
+V v = e4(t, u);
+return e5(u, v);</programlisting>
+    <para>
+      We are going to change some of the syntax rules.
+    </para>
+  </sect2>
+  <sect2>
+    <title>Change the syntax</title>
+    <itemizedlist>
+      <listitem>
+        <para>
+          Remove type-annotations.
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          Swap the left/right of an assignment.
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <code>void</code> methods will return a value that is ignored (let's call it <code>_</code>).
+        </para>
+      </listitem>
+    </itemizedlist>
+    <programlisting lang="Java">
+e1() = t;
+e2(t) = _;
+e3(t) = u;
+e4(t, u) = v;
+return e5(u, v);</programlisting>
+  </sect2>
+  <sect2>
+    <title>More changes</title>
+    <itemizedlist>
+      <listitem>
+        <para>
+          Replace semi-colons with <code>=></code>.
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          Replace <code>return</code> with <code>pure</code>.
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          Replace <code>=</code> with <code>flatMap</code>.
+        </para>
+      </listitem>
+    </itemizedlist>
+    <example>
+      <title>Zing!</title>
+      <programlisting lang="Java">
+e1() flatMap t =>
+e2(t) flatMap _ =>
+e3(t) flatMap u =>
+e4(t, u) flatMap v =>
+pure e5(u, v);</programlisting>
+    </example>
+  </sect2>
+</sect1>
