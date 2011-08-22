@@ -13,7 +13,6 @@ phonogram
 sublicense
 Docbook
 scala
-recognizably
 Licence
 ShareAlike
 Moggi
