@@ -15,9 +15,11 @@ Requires on the PATH
 Requires packages (hackage)
 
 * FilePather
+* MissingH
 
 -}
 
+import Data.String.Utils hiding (join)
 import System.Cmd
 import System.Exit
 import System.FilePath
@@ -106,9 +108,10 @@ defaultConfig n t =
          , ("body.font.family", "Delicious")
          , ("monospace.font.family", "Courier")
          , ("title.font.family", "Gentium Basic")
+         , ("navig.showtitles", "0")
          ]
          defaultVersions
-         "https://github.com/tonymorris/docbook-dependencies/raw/2.0.0"
+         "https://raw.github.com/tonymorris/docbook-dependencies/2.0.0"
          True
 
 spellingErrors ::
@@ -140,6 +143,11 @@ indexFile ::
   FilePath
 indexFile =
   docbooksrc </> "index.xml"
+
+htmlIndex ::
+  FilePath
+htmlIndex =
+  "etc" </> "index.html"
 
 resources ::
   FilePath
@@ -357,31 +365,31 @@ pdf ::
   Config
   -> IO ExitCode
 pdf c =
-  fop' c "pdf" "pdf/index.pdf"
+  fop' c "pdf" ("pdf" </> "index.pdf")
 
 ps ::
   Config
   -> IO ExitCode
 ps c =
-  fop' c "ps" "ps/index.ps"
+  fop' c "ps" ("ps" </> "index.ps")
 
 pcl ::
   Config
   -> IO ExitCode
 pcl c =
-  fop' c "pcl" "pcl/index.pcl"
+  fop' c "pcl" ("pcl" </> "index.pcl")
 
 png ::
   Config
   -> IO ExitCode
 png c =
-  fop' c "png" "png/index.png"
+  fop' c "png" ("png" </> "index.png")
 
 rtf ::  
   Config
   -> IO ExitCode
 rtf c =
-  fop' c "rtf" "rtf/index.rtf"
+  fop' c "rtf" ("rtf" </> "index.rtf")
 
 clean ::
   IO ()
@@ -409,7 +417,11 @@ alll ::
 	Config
   -> IO ()
 alll c =
-	mapM_ ($c) buildAll
+  do mapM_ ($c) buildAll
+     t <- readFile htmlIndex
+     d <- getDirectoryContents (dist c </> "png")
+     let p = (\(i, k) -> "<li class=\"" ++ k : "\"><a href=\"png/index" ++ i ++ ".png\">Page</a></li>") =<< ([] : map show [2 .. length . filter ("index" `isPrefixOf`) $ d]) `zip` join (repeat "ox")
+     writeFile (dist c </> name c) (replace "$PNGPAGES" p $ replace "$TITLE" (title c) t)
 
 releaseBuild ::
   FilePath
