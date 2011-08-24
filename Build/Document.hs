@@ -1,23 +1,5 @@
 module Build.Document where
 
-{-
-
-Requires on the PATH
-
-* java
-* rsync
-* wget 
-* xsltproc
-* aspell
-* xmllint
-* tar
-
-Requires packages (hackage)
-
-* FilePather
-* MissingH
-
--}
 
 import Data.String.Utils hiding (join)
 import System.Cmd
