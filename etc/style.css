@@ -40,13 +40,13 @@ div.blockquote table {
 
 tr, td, th {
   font-size:24px;
-  border: 0;
+  border-width: 1px;
 }
 
 body {
   color: #000;
-  font-size:24px;
-  line-height:35px;
+  font-size:18px;
+  line-height:25px;
   font-family:'Lucida Grande', Verdana, Arial, sans-serif;
   background-color:#fff;
   margin: 15px;
@@ -104,7 +104,7 @@ img.center {
   display:block;
 }
 
-pre.programlisting{
+pre.programlisting {
   color:white;
   background: #000 no-repeat top right;
   font-family:Monaco, Consolas, "Courier New", monospace;
@@ -135,6 +135,10 @@ a[accesskey=n], a[accesskey=p], a[accesskey=h], a[accesskey=u] {
   font-style: italic;
 }
 
+.caption {
+  font-size: medium;
+}
+
 .footnote {
   font-size:small;
   font-weight:bold;
@@ -144,3 +148,6 @@ a[accesskey=n], a[accesskey=p], a[accesskey=h], a[accesskey=u] {
   font-size:small;
 }
 
+.subtitle {
+  font-size: medium;
+}
